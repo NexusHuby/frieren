@@ -1,184 +1,144 @@
+-- VexIcons - Lucide-style Icon Module for VexLib
+-- Usage: Load via loadstring and pass URL to Window options, or require directly
+-- 
+-- TO USE REAL LUCIDE ICONS:
+-- 1. Download Lucide icons from https://lucide.dev
+-- 2. Upload to Roblox as Decals (use a tool like Roblox Studio or an uploader)
+-- 3. Replace the rbxassetid:// placeholders below with your actual asset IDs
+-- 4. Or use the Unicode fallbacks which work immediately
+
+local Icons = {
+    -- Navigation
+    ["home"] = "rbxassetid://10723434557",      -- or "⌂"
+    ["settings"] = "rbxassetid://10734950020",  -- or "⚙"
+    ["user"] = "rbxassetid://10723435360",      -- or "👤"
+    ["users"] = "rbxassetid://10723435534",     -- or "👥"
+    ["search"] = "rbxassetid://10723434756",    -- or "🔍"
+    ["menu"] = "rbxassetid://10723434612",      -- or "☰"
+    ["more-horizontal"] = "rbxassetid://10723434612", -- or "⋯"
+    ["more-vertical"] = "rbxassetid://10723434612",   -- or "⋮"
+
+    -- Actions
+    ["plus"] = "rbxassetid://10723434901",      -- or "+"
+    ["minus"] = "rbxassetid://10738425319",     -- or "−"
+    ["x"] = "rbxassetid://10747384394",         -- or "✕"
+    ["check"] = "rbxassetid://10709791229",     -- or "✓"
+    ["chevron-down"] = "rbxassetid://10709790948", -- or "▼"
+    ["chevron-up"] = "rbxassetid://10709790948",   -- or "▲"
+    ["chevron-left"] = "rbxassetid://10709790948", -- or "◀"
+    ["chevron-right"] = "rbxassetid://10709790948", -- or "▶"
+    ["arrow-up"] = "rbxassetid://10709790948",  -- or "↑"
+    ["arrow-down"] = "rbxassetid://10709790948", -- or "↓"
+    ["refresh"] = "rbxassetid://10723434756",   -- or "↻"
+    ["trash"] = "rbxassetid://10723435201",     -- or "🗑"
+    ["edit"] = "rbxassetid://10723434557",      -- or "✎"
+    ["copy"] = "rbxassetid://10723434557",      -- or "⎘"
+    ["download"] = "rbxassetid://10723434557",  -- or "⬇"
+    ["upload"] = "rbxassetid://10723434557",    -- or "⬆"
+    ["play"] = "rbxassetid://10723434901",      -- or "▶"
+    ["pause"] = "rbxassetid://10723434901",     -- or "⏸"
+    ["stop"] = "rbxassetid://10723434901",      -- or "■"
+    ["save"] = "rbxassetid://10723434756",      -- or "💾"
+
+    -- Status
+    ["info"] = "rbxassetid://10723434557",      -- or "ℹ"
+    ["alert-circle"] = "rbxassetid://10723434557", -- or "⚠"
+    ["alert-triangle"] = "rbxassetid://10723434557", -- or "▲"
+    ["check-circle"] = "rbxassetid://10709791229",   -- or "✓"
+    ["x-circle"] = "rbxassetid://10747384394",     -- or "✕"
+    ["help-circle"] = "rbxassetid://10723434557",  -- or "?"
+    ["star"] = "rbxassetid://10723435123",     -- or "★"
+    ["heart"] = "rbxassetid://10723434557",    -- or "♥"
+    ["shield"] = "rbxassetid://10723435034",   -- or "🛡"
+    ["lock"] = "rbxassetid://10723434612",     -- or "🔒"
+    ["unlock"] = "rbxassetid://10723434612",   -- or "🔓"
+    ["eye"] = "rbxassetid://10723434557",      -- or "👁"
+    ["eye-off"] = "rbxassetid://10723434557",  -- or "🚫"
+    ["zap"] = "rbxassetid://10723435360",      -- or "⚡"
+    ["flame"] = "rbxassetid://10723434557",    -- or "🔥"
+    ["award"] = "rbxassetid://10723434557",    -- or "🏆"
+
+    -- Gaming / Roblox specific
+    ["sword"] = "rbxassetid://10723435123",    -- or "⚔"
+    ["skull"] = "rbxassetid://10723435034",    -- or "💀"
+    ["target"] = "rbxassetid://10723435201",   -- or "◎"
+    ["crosshair"] = "rbxassetid://10723435201", -- or "⊕"
+    ["map"] = "rbxassetid://10723434612",      -- or "🗺"
+    ["compass"] = "rbxassetid://10723434557",  -- or "🧭"
+    ["flag"] = "rbxassetid://10723434557",     -- or "⚑"
+    ["trophy"] = "rbxassetid://10723435201",   -- or "🏆"
+    ["gem"] = "rbxassetid://10723434557",      -- or "💎"
+    ["crown"] = "rbxassetid://10723434557",    -- or "👑"
+
+    -- Misc
+    ["code"] = "rbxassetid://10723434557",     -- or "</>"
+    ["terminal"] = "rbxassetid://10723435201", -- or ">_"
+    ["bug"] = "rbxassetid://10723434557",      -- or "🐛"
+    ["cpu"] = "rbxassetid://10723434557",      -- or "🖥"
+    ["wifi"] = "rbxassetid://10723435360",     -- or "📶"
+    ["battery"] = "rbxassetid://10723434557",  -- or "🔋"
+    ["clock"] = "rbxassetid://10723434557",    -- or "🕐"
+    ["calendar"] = "rbxassetid://10723434557", -- or "📅"
+    ["mail"] = "rbxassetid://10723434612",     -- or "✉"
+    ["message"] = "rbxassetid://10723434612",  -- or "💬"
+    ["bell"] = "rbxassetid://10723434557",     -- or "🔔"
+    ["music"] = "rbxassetid://10723434612",    -- or "♪"
+    ["image"] = "rbxassetid://10723434557",    -- or "🖼"
+    ["file"] = "rbxassetid://10723434557",     -- or "📄"
+    ["folder"] = "rbxassetid://10723434557",   -- or "📁"
+    ["database"] = "rbxassetid://10723434557", -- or "🗄"
+    ["cloud"] = "rbxassetid://10723434557",    -- or "☁"
+    ["sun"] = "rbxassetid://10723435123",      -- or "☀"
+    ["moon"] = "rbxassetid://10723434612",     -- or "☽"
+    ["anchor"] = "rbxassetid://10723434557",   -- or "⚓"
+    ["globe"] = "rbxassetid://10723434557",    -- or "🌐"
+    ["layers"] = "rbxassetid://10723434612",   -- or "▰"
+    ["grid"] = "rbxassetid://10723434557",     -- or "⊞"
+    ["list"] = "rbxassetid://10723434612",     -- or "☰"
+    ["sliders"] = "rbxassetid://10723435034",  -- or "⚎"
+    ["tool"] = "rbxassetid://10723435201",     -- or "🔧"
+    ["hammer"] = "rbxassetid://10723434557",   -- or "🔨"
+    ["package"] = "rbxassetid://10723434901",  -- or "📦"
+    ["shopping-cart"] = "rbxassetid://10723435034", -- or "🛒"
+    ["credit-card"] = "rbxassetid://10723434557",   -- or "💳"
+    ["dollar-sign"] = "rbxassetid://10723434557",   -- or "$"
+    ["trending-up"] = "rbxassetid://10723435201",   -- or "📈"
+    ["trending-down"] = "rbxassetid://10723435201", -- or "📉"
+    ["activity"] = "rbxassetid://10723434557",      -- or "📊"
+    ["bar-chart"] = "rbxassetid://10723434557",     -- or "📊"
+    ["pie-chart"] = "rbxassetid://10723434557",     -- or "◴"
+    ["hash"] = "rbxassetid://10723434557",          -- or "#"
+    ["at-sign"] = "rbxassetid://10723434557",       -- or "@"
+    ["link"] = "rbxassetid://10723434612",           -- or "🔗"
+    ["paperclip"] = "rbxassetid://10723434901",     -- or "📎"
+    ["bookmark"] = "rbxassetid://10723434557",        -- or "🔖"
+    ["tag"] = "rbxassetid://10723435201",           -- or "🏷"
+    ["bookmark"] = "rbxassetid://10723434557",      -- or "🔖"
+    ["pin"] = "rbxassetid://10723434901",           -- or "📌"
+
+    -- Default fallback
+    ["default"] = "rbxassetid://10723434557",    -- or "•"
+}
+
 --[[
-    NexusUI Icons Module
-    Lucide-style SVG path data encoded for Roblox DrawingLib rendering.
-    Each icon is a table of {path, viewBox} where path is a simplified
-    set of line/curve commands translated into point arrays.
+    HOW TO ADD REAL LUCIDE ICONS:
 
-    Usage:
-        local Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/Icons.lua"))()
-        local homeIcon = Icons.Home
-        -- homeIcon.Points = array of Vector2 segments
-        -- homeIcon.Size   = number (viewBox size, always 24)
-]]
+    Method 1 - Direct Upload:
+    1. Go to https://lucide.dev/icons
+    2. Download the SVG icons you want
+    3. Convert SVG to PNG (256x256 recommended)
+    4. Upload to Roblox as a Decal
+    5. Use the decal's Image ID (rbxassetid://) in this table
 
-local Icons = {}
+    Method 2 - Using a Lucide-to-Roblox service:
+    Some exploit communities maintain Lucide icon packs.
+    Common packs use IDs in these ranges:
+    - Phosphor Icons: Various asset IDs
+    - Lucide Roblox: Search for "lucide icons roblox" in communities
 
--- Each icon entry:
---   Points = { {Vector2, Vector2, ...}, ... }  -- sub-paths (line segments approximating the SVG path)
---   Size   = 24   (reference viewBox dimension; scale as needed)
--- Points are normalized to 0-1 range for easy scaling.
-
-local function v(x, y) return Vector2.new(x / 24, y / 24) end
-
--- ─── Home ──────────────────────────────────────────────────────────────────
-Icons.Home = {
-    Size = 24,
-    Points = {
-        { v(3,9), v(12,2), v(21,9), v(21,22), v(15,22), v(15,14), v(9,14), v(9,22), v(3,22), v(3,9) },
-    }
-}
-
--- ─── Settings (Gear) ───────────────────────────────────────────────────────
--- Approximated as octagon outer + circle inner
-Icons.Settings = {
-    Size = 24,
-    Points = {
-        {   -- outer gear approximation (12 points)
-            v(12,2), v(15.09,3.77), v(17.66,6.34), v(21.95,7), v(21.95,10.5),
-            v(22,12), v(21.95,13.5), v(21.95,17), v(17.66,17.66), v(15.09,20.23),
-            v(12,22), v(8.91,20.23), v(6.34,17.66), v(2.05,17), v(2.05,13.5),
-            v(2,12), v(2.05,10.5), v(2.05,7), v(6.34,6.34), v(8.91,3.77), v(12,2),
-        },
-        { v(15,12), v(14.65,13.65), v(13.65,14.65), v(12,15), v(10.35,14.65), v(9.35,13.65), v(9,12), v(9.35,10.35), v(10.35,9.35), v(12,9), v(13.65,9.35), v(14.65,10.35), v(15,12) },
-    }
-}
-
--- ─── User / Person ─────────────────────────────────────────────────────────
-Icons.User = {
-    Size = 24,
-    Points = {
-        { v(12,4), v(14.83,4), v(16,6.17), v(16,8), v(14.83,9.83), v(12,11), v(9.17,9.83), v(8,8), v(8,6.17), v(9.17,4), v(12,4) },
-        { v(4,21), v(4,18), v(5.5,15.5), v(9,14), v(12,14), v(15,14), v(18.5,15.5), v(20,18), v(20,21) },
-    }
-}
-
--- ─── Shield ────────────────────────────────────────────────────────────────
-Icons.Shield = {
-    Size = 24,
-    Points = {
-        { v(12,2), v(20,5), v(20,11), v(12,22), v(4,11), v(4,5), v(12,2) },
-    }
-}
-
--- ─── Eye ───────────────────────────────────────────────────────────────────
-Icons.Eye = {
-    Size = 24,
-    Points = {
-        { v(1,12), v(4.22,7), v(12,4), v(19.78,7), v(23,12), v(19.78,17), v(12,20), v(4.22,17), v(1,12) },
-        { v(15,12), v(14,14.73), v(12,15), v(10,14.73), v(9,12), v(10,9.27), v(12,9), v(14,9.27), v(15,12) },
-    }
-}
-
--- ─── Layers ────────────────────────────────────────────────────────────────
-Icons.Layers = {
-    Size = 24,
-    Points = {
-        { v(2,7), v(12,2), v(22,7), v(12,12), v(2,7) },
-        { v(2,12), v(12,17), v(22,12) },
-        { v(2,17), v(12,22), v(22,17) },
-    }
-}
-
--- ─── Zap / Lightning ───────────────────────────────────────────────────────
-Icons.Zap = {
-    Size = 24,
-    Points = {
-        { v(13,2), v(3,14), v(12,14), v(11,22), v(21,10), v(12,10), v(13,2) },
-    }
-}
-
--- ─── Box / Cube ────────────────────────────────────────────────────────────
-Icons.Box = {
-    Size = 24,
-    Points = {
-        { v(21,16), v(12,21), v(3,16), v(3,8), v(12,3), v(21,8), v(21,16) },
-        { v(12,21), v(12,12) },
-        { v(3,8), v(12,12), v(21,8) },
-    }
-}
-
--- ─── Crosshair / Target ────────────────────────────────────────────────────
-Icons.Target = {
-    Size = 24,
-    Points = {
-        { v(8,12), v(9.17,9.17), v(12,8), v(14.83,9.17), v(16,12), v(14.83,14.83), v(12,16), v(9.17,14.83), v(8,12) },
-        { v(4.93,4.93), v(7.76,7.76) },
-        { v(16.24,16.24), v(19.07,19.07) },
-        { v(7.76,16.24), v(4.93,19.07) },
-        { v(19.07,4.93), v(16.24,7.76) },
-        { v(12,2), v(12,4) },
-        { v(12,20), v(12,22) },
-        { v(2,12), v(4,12) },
-        { v(20,12), v(22,12) },
-    }
-}
-
--- ─── Globe ─────────────────────────────────────────────────────────────────
-Icons.Globe = {
-    Size = 24,
-    Points = {
-        { v(3,12), v(3.55,8), v(5.7,5), v(9,3.28), v(12,3), v(15,3.28), v(18.3,5), v(20.45,8), v(21,12), v(20.45,16), v(18.3,19), v(15,20.72), v(12,21), v(9,20.72), v(5.7,19), v(3.55,16), v(3,12) },
-        { v(3,12), v(7.5,12), v(12,12), v(16.5,12), v(21,12) },
-        { v(12,3), v(10,7.5), v(9.5,12), v(10,16.5), v(12,21) },
-        { v(12,3), v(14,7.5), v(14.5,12), v(14,16.5), v(12,21) },
-    }
-}
-
--- ─── Code ──────────────────────────────────────────────────────────────────
-Icons.Code = {
-    Size = 24,
-    Points = {
-        { v(16,18), v(22,12), v(16,6) },
-        { v(8,6), v(2,12), v(8,18) },
-    }
-}
-
--- ─── Database ──────────────────────────────────────────────────────────────
-Icons.Database = {
-    Size = 24,
-    Points = {
-        { v(3,6), v(5.18,3.87), v(12,3), v(18.82,3.87), v(21,6), v(21,8), v(18.82,10.13), v(12,11), v(5.18,10.13), v(3,8), v(3,6) },
-        { v(3,8), v(3,14), v(5.18,16.13), v(12,17), v(18.82,16.13), v(21,14), v(21,8) },
-        { v(3,14), v(3,20), v(5.18,22.13), v(12,23), v(18.82,22.13), v(21,20), v(21,14) },
-    }
-}
-
--- ─── Sword ─────────────────────────────────────────────────────────────────
-Icons.Sword = {
-    Size = 24,
-    Points = {
-        { v(14.5,17.5), v(3,6), v(3,3), v(6,3), v(17.5,14.5) },
-        { v(13,19), v(15,21) },
-        { v(19,13), v(21,15) },
-        { v(16,16), v(20,20) },
-    }
-}
-
--- ─── Star ──────────────────────────────────────────────────────────────────
-Icons.Star = {
-    Size = 24,
-    Points = {
-        { v(12,2), v(15.09,8.26), v(22,9.27), v(17,14.14), v(18.18,21.02), v(12,17.77), v(5.82,21.02), v(7,14.14), v(2,9.27), v(8.91,8.26), v(12,2) },
-    }
-}
-
--- ─── Flame ─────────────────────────────────────────────────────────────────
-Icons.Flame = {
-    Size = 24,
-    Points = {
-        { v(8.5,14.5), v(9,10), v(12,3), v(14,8), v(17,6), v(18,10), v(18,13), v(16.5,16.5), v(15,18.5), v(12,21), v(9,18.5), v(7,16), v(6,13), v(8.5,14.5) },
-    }
-}
-
--- ─── Package ───────────────────────────────────────────────────────────────
-Icons.Package = {
-    Size = 24,
-    Points = {
-        { v(16.5,9.4), v(7.55,4.24) },
-        { v(21,16), v(12,21), v(3,16), v(3,8), v(12,3), v(21,8), v(21,16) },
-        { v(3.27,6.96), v(12,12.01), v(20.73,6.96) },
-        { v(12,22.08), v(12,12) },
-    }
-}
+    Method 3 - Text Fallbacks:
+    The Unicode characters shown after "or" above work immediately
+    without any uploads, though they are not as visually polished.
+--]]
 
 return Icons
