@@ -16,7 +16,7 @@ local Config = {
         Background = Color3.fromRGB(12, 12, 14),
         Secondary = Color3.fromRGB(18, 18, 20),
         Tertiary = Color3.fromRGB(28, 28, 32),
-        Accent = Color3.fromRGB(30, 80, 180),
+        Accent = Color3.fromRGB(123, 46, 47),
         Text = Color3.fromRGB(240, 240, 240),
         SubText = Color3.fromRGB(150, 150, 155),
         Border = Color3.fromRGB(55, 55, 60),
@@ -125,8 +125,19 @@ function VexLib:CreateWindow(options)
         ClipsDescendants = true
     })
 
+    -- Subtle top gradient for depth
+    local topGradient = Create("Frame", {
+        Parent = mainFrame,
+        BackgroundColor3 = Color3.fromRGB(123, 46, 47),
+        BackgroundTransparency = 0.92,
+        BorderSizePixel = 0,
+        Size = UDim2.new(1, 0, 0, 120),
+        Position = UDim2.new(0, 0, 0, 0),
+        ZIndex = 0
+    })
+
     Create("UICorner", {Parent = mainFrame, CornerRadius = UDim.new(0, 10)})
-    Create("UIStroke", {Parent = mainFrame, Color = Color3.fromRGB(255, 255, 255), Thickness = 1.2})
+    Create("UIStroke", {Parent = mainFrame, Color = Color3.fromRGB(255, 255, 255), Thickness = 0.6})
 
     -- Shadow (using ImageLabel for pseudo-shadow)
     local shadow = Create("ImageLabel", {
@@ -161,13 +172,25 @@ function VexLib:CreateWindow(options)
 
     Create("UICorner", {Parent = titleBar, CornerRadius = UDim.new(0, 10)})
 
-    -- Fix bottom corners of title bar
+    -- Fix bottom corners of title bar (seamless blend into main frame)
     local titleFix = Create("Frame", {
         Parent = titleBar,
         BackgroundColor3 = Config.Theme.Secondary,
         BorderSizePixel = 0,
-        Size = UDim2.new(1, 0, 0.5, 0),
-        Position = UDim2.new(0, 0, 0.5, 0)
+        Size = UDim2.new(1, 0, 0, 10),
+        Position = UDim2.new(0, 0, 1, -10),
+        ZIndex = 0
+    })
+
+    -- Subtle top accent glow line
+    local topGlow = Create("Frame", {
+        Parent = titleBar,
+        BackgroundColor3 = Color3.fromRGB(123, 46, 47),
+        BackgroundTransparency = 0.6,
+        BorderSizePixel = 0,
+        Size = UDim2.new(1, 0, 0, 1.5),
+        Position = UDim2.new(0, 0, 0, 0),
+        ZIndex = 10
     })
 
     -- Title Text
@@ -285,7 +308,7 @@ function VexLib:CreateWindow(options)
         Size = UDim2.new(0, 24, 0, 24),
         Position = UDim2.new(1, -24, 1, -24),
         Image = "rbxassetid://10709791278",
-        ImageColor3 = Config.Theme.Border,
+        ImageColor3 = Color3.fromRGB(60, 60, 65),
         AutoButtonColor = false,
         ZIndex = 10
     })
@@ -419,7 +442,7 @@ function VexLib:CreateWindow(options)
             Size = UDim2.new(1, -20, 1, -20),
             Position = UDim2.new(0, 10, 0, 10),
             ScrollBarThickness = 3,
-            ScrollBarImageColor3 = Config.Theme.Border,
+            ScrollBarImageColor3 = Color3.fromRGB(60, 60, 65),
             CanvasSize = UDim2.new(0, 0, 0, 0),
             AutomaticCanvasSize = Enum.AutomaticSize.Y,
             Visible = false
@@ -497,6 +520,18 @@ function VexLib:CreateWindow(options)
             Create("UICorner", {Parent = sectionFrame, CornerRadius = UDim.new(0, 8)})
             Create("UIStroke", {Parent = sectionFrame, Color = Config.Theme.Border, Thickness = 0.5, Transparency = 0.5})
 
+            -- Left accent line for modern look
+            local sectionAccent = Create("Frame", {
+                Parent = sectionFrame,
+                BackgroundColor3 = Color3.fromRGB(123, 46, 47),
+                BackgroundTransparency = 0.4,
+                BorderSizePixel = 0,
+                Size = UDim2.new(0, 2.5, 1, -16),
+                Position = UDim2.new(0, 0, 0, 8),
+                ZIndex = 2
+            })
+            Create("UICorner", {Parent = sectionAccent, CornerRadius = UDim.new(1, 0)})
+
             local sectionTitle = Create("TextLabel", {
                 Parent = sectionFrame,
                 BackgroundTransparency = 1,
@@ -534,7 +569,7 @@ function VexLib:CreateWindow(options)
             function section:CreateButton(text, callback)
                 local btn = Create("TextButton", {
                     Parent = sectionContent,
-                    BackgroundColor3 = Color3.fromRGB(35, 90, 200),
+                    BackgroundColor3 = Color3.fromRGB(123, 46, 47),
                     BorderSizePixel = 0,
                     Size = UDim2.new(1, 0, 0, 34),
                     Font = Enum.Font.GothamSemibold,
@@ -548,7 +583,7 @@ function VexLib:CreateWindow(options)
                 Create("UICorner", {Parent = btn, CornerRadius = UDim.new(0, 6)})
 
                 btn.MouseEnter:Connect(function()
-                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(50, 110, 230)})
+                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(153, 66, 67)})
                 end)
 
                 btn.MouseLeave:Connect(function()
@@ -556,9 +591,9 @@ function VexLib:CreateWindow(options)
                 end)
 
                 btn.MouseButton1Click:Connect(function()
-                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(25, 70, 160)}, TweenInfo.new(0.1))
+                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(93, 36, 37)}, TweenInfo.new(0.1))
                     task.wait(0.1)
-                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(35, 90, 200)}, TweenInfo.new(0.15))
+                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(123, 46, 47)}, TweenInfo.new(0.15))
                     if callback then callback() end
                 end)
 
@@ -588,7 +623,7 @@ function VexLib:CreateWindow(options)
 
                 local toggleBtn = Create("Frame", {
                     Parent = toggleFrame,
-                    BackgroundColor3 = toggle.Value and Config.Theme.Accent or Config.Theme.Tertiary,
+                    BackgroundColor3 = toggle.Value and Color3.fromRGB(123, 46, 47) or Config.Theme.Tertiary,
                     BorderSizePixel = 0,
                     Size = UDim2.new(0, 44, 0, 22),
                     Position = UDim2.new(1, -44, 0.5, -11)
@@ -598,7 +633,7 @@ function VexLib:CreateWindow(options)
 
                 local toggleCircle = Create("Frame", {
                     Parent = toggleBtn,
-                    BackgroundColor3 = Config.Theme.Text,
+                    BackgroundColor3 = toggle.Value and Color3.fromRGB(200, 200, 205) or Color3.fromRGB(100, 100, 105),
                     BorderSizePixel = 0,
                     Size = UDim2.new(0, 18, 0, 18),
                     Position = toggle.Value and UDim2.new(1, -20, 0.5, -9) or UDim2.new(0, 2, 0.5, -9)
@@ -615,8 +650,8 @@ function VexLib:CreateWindow(options)
 
                 function toggle:SetValue(val)
                     toggle.Value = val
-                    Tween(toggleBtn, {BackgroundColor3 = toggle.Value and Config.Theme.Accent or Config.Theme.Tertiary})
-                    Tween(toggleCircle, {Position = toggle.Value and UDim2.new(1, -20, 0.5, -9) or UDim2.new(0, 2, 0.5, -9)})
+                    Tween(toggleBtn, {BackgroundColor3 = toggle.Value and Color3.fromRGB(123, 46, 47) or Config.Theme.Tertiary})
+                    Tween(toggleCircle, {Position = toggle.Value and UDim2.new(1, -20, 0.5, -9) or UDim2.new(0, 2, 0.5, -9), BackgroundColor3 = toggle.Value and Color3.fromRGB(200, 200, 205) or Color3.fromRGB(100, 100, 105)})
                     if callback then callback(toggle.Value) end
                 end
 
@@ -660,7 +695,7 @@ function VexLib:CreateWindow(options)
                     Position = UDim2.new(1, -60, 0, 0),
                     Font = Enum.Font.GothamBold,
                     Text = tostring(slider.Value),
-                    TextColor3 = Config.Theme.Accent,
+                    TextColor3 = Color3.fromRGB(123, 46, 47),
                     TextSize = 13,
                     TextXAlignment = Enum.TextXAlignment.Right
                 })
@@ -677,7 +712,7 @@ function VexLib:CreateWindow(options)
 
                 local fill = Create("Frame", {
                     Parent = track,
-                    BackgroundColor3 = Color3.fromRGB(50, 120, 240),
+                    BackgroundColor3 = Color3.fromRGB(123, 46, 47),
                     BorderSizePixel = 0,
                     Size = UDim2.new((slider.Value - min) / (max - min), 0, 1, 0)
                 })
@@ -694,7 +729,7 @@ function VexLib:CreateWindow(options)
                 })
 
                 Create("UICorner", {Parent = handle, CornerRadius = UDim.new(1, 0)})
-                Create("UIStroke", {Parent = handle, Color = Color3.fromRGB(50, 120, 240), Thickness = 2.5})
+                Create("UIStroke", {Parent = handle, Color = Color3.fromRGB(123, 46, 47), Thickness = 2.5})
 
                 local dragging = false
 
@@ -906,7 +941,7 @@ function VexLib:CreateWindow(options)
                     optBtn.MouseButton1Click:Connect(function()
                         dropdown.Value = option
                         dropdownBtn.Text = option
-                        dropdownBtn.TextColor3 = Config.Theme.Text
+                        dropdownBtn.TextColor3 = Color3.fromRGB(200, 200, 205)
                         dropdown.Open = false
                         optionContainer.Visible = false
                         dropdownFrame.Size = UDim2.new(1, 0, 0, 62)
@@ -1011,7 +1046,7 @@ function VexLib:CreateWindow(options)
                         dropdownBtn.TextColor3 = Config.Theme.SubText
                     else
                         dropdownBtn.Text = table.concat(dropdown.Values, ", ")
-                        dropdownBtn.TextColor3 = Config.Theme.Text
+                        dropdownBtn.TextColor3 = Color3.fromRGB(200, 200, 205)
                     end
                 end
 
@@ -1296,7 +1331,7 @@ function VexLib:CreateWindow(options)
                 keybindBtn.MouseButton1Click:Connect(function()
                     listening = true
                     keybindBtn.Text = "..."
-                    Tween(keybindBtn, {BackgroundColor3 = Config.Theme.Accent})
+                    Tween(keybindBtn, {BackgroundColor3 = Color3.fromRGB(123, 46, 47)})
                 end)
 
                 UserInputService.InputBegan:Connect(function(input, gameProcessed)
