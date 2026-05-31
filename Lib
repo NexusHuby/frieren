@@ -13,10 +13,10 @@ local Mouse = LocalPlayer:GetMouse()
 -- ==================== CONFIGURATION ====================
 local Config = {
     Theme = {
-        Background = Color3.fromRGB(22, 22, 24),
-        Secondary = Color3.fromRGB(30, 30, 33),
-        Tertiary = Color3.fromRGB(40, 40, 44),
-        Accent = Color3.fromRGB(88, 130, 250),
+        Background = Color3.fromRGB(12, 12, 14),
+        Secondary = Color3.fromRGB(18, 18, 20),
+        Tertiary = Color3.fromRGB(28, 28, 32),
+        Accent = Color3.fromRGB(30, 80, 180),
         Text = Color3.fromRGB(240, 240, 240),
         SubText = Color3.fromRGB(150, 150, 155),
         Border = Color3.fromRGB(55, 55, 60),
@@ -126,7 +126,7 @@ function VexLib:CreateWindow(options)
     })
 
     Create("UICorner", {Parent = mainFrame, CornerRadius = UDim.new(0, 10)})
-    Create("UIStroke", {Parent = mainFrame, Color = Config.Theme.Border, Thickness = 1.2})
+    Create("UIStroke", {Parent = mainFrame, Color = Color3.fromRGB(255, 255, 255), Thickness = 1.2})
 
     -- Shadow (using ImageLabel for pseudo-shadow)
     local shadow = Create("ImageLabel", {
@@ -183,43 +183,56 @@ function VexLib:CreateWindow(options)
         TextXAlignment = Enum.TextXAlignment.Left
     })
 
-    -- Window Controls
+    -- Window Controls (Red/Yellow Circles)
     local controlsFrame = Create("Frame", {
         Parent = titleBar,
         BackgroundTransparency = 1,
-        Size = UDim2.new(0, 70, 0, 28),
-        Position = UDim2.new(1, -76, 0.5, -14)
+        Size = UDim2.new(0, 52, 0, 16),
+        Position = UDim2.new(1, -62, 0.5, -8)
     })
 
-    -- Minimize Button (ImageButton)
-    local minBtn = Create("ImageButton", {
-        Parent = controlsFrame,
-        Name = "Minimize",
-        BackgroundTransparency = 1,
-        Size = UDim2.new(0, 28, 0, 28),
-        Position = UDim2.new(0, 0, 0, 0),
-        Image = "rbxassetid://10738425319",
-        ImageColor3 = Config.Theme.SubText,
-        AutoButtonColor = false
-    })
-
-    -- Close Button (ImageButton)
-    local closeBtn = Create("ImageButton", {
+    -- Close Button (Red Circle)
+    local closeBtn = Create("TextButton", {
         Parent = controlsFrame,
         Name = "Close",
-        BackgroundTransparency = 1,
-        Size = UDim2.new(0, 28, 0, 28),
-        Position = UDim2.new(0, 34, 0, 0),
-        Image = "rbxassetid://10747384394",
-        ImageColor3 = Config.Theme.SubText,
+        BackgroundColor3 = Color3.fromRGB(255, 70, 70),
+        BorderSizePixel = 0,
+        Size = UDim2.new(0, 14, 0, 14),
+        Position = UDim2.new(0, 0, 0.5, -7),
+        Text = "",
         AutoButtonColor = false
     })
+    Create("UICorner", {Parent = closeBtn, CornerRadius = UDim.new(1, 0)})
 
-    -- Hover effects
-    closeBtn.MouseEnter:Connect(function() Tween(closeBtn, {ImageColor3 = Config.Theme.Error}) end)
-    closeBtn.MouseLeave:Connect(function() Tween(closeBtn, {ImageColor3 = Config.Theme.SubText}) end)
-    minBtn.MouseEnter:Connect(function() Tween(minBtn, {ImageColor3 = Config.Theme.Text}) end)
-    minBtn.MouseLeave:Connect(function() Tween(minBtn, {ImageColor3 = Config.Theme.SubText}) end)
+    -- Minimize Button (Yellow Circle)
+    local minBtn = Create("TextButton", {
+        Parent = controlsFrame,
+        Name = "Minimize",
+        BackgroundColor3 = Color3.fromRGB(255, 190, 50),
+        BorderSizePixel = 0,
+        Size = UDim2.new(0, 14, 0, 14),
+        Position = UDim2.new(0, 22, 0.5, -7),
+        Text = "",
+        AutoButtonColor = false
+    })
+    Create("UICorner", {Parent = minBtn, CornerRadius = UDim.new(1, 0)})
+
+    -- Hover effects for circles
+    closeBtn.MouseEnter:Connect(function() Tween(closeBtn, {BackgroundColor3 = Color3.fromRGB(255, 100, 100)}) end)
+    closeBtn.MouseLeave:Connect(function() Tween(closeBtn, {BackgroundColor3 = Color3.fromRGB(255, 70, 70)}) end)
+    minBtn.MouseEnter:Connect(function() Tween(minBtn, {BackgroundColor3 = Color3.fromRGB(255, 210, 80)}) end)
+    minBtn.MouseLeave:Connect(function() Tween(minBtn, {BackgroundColor3 = Color3.fromRGB(255, 190, 50)}) end)
+
+    -- Divider under title bar
+    local titleDivider = Create("Frame", {
+        Parent = mainFrame,
+        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+        BackgroundTransparency = 0.15,
+        BorderSizePixel = 0,
+        Size = UDim2.new(1, 0, 0, 1),
+        Position = UDim2.new(0, 0, 0, 38),
+        ZIndex = 5
+    })
 
     -- Tab Sidebar
     local tabContainer = Create("Frame", {
@@ -329,12 +342,14 @@ function VexLib:CreateWindow(options)
             contentContainer.Visible = false
             tabContainer.Visible = false
             resizeHandle.Visible = false
+            titleDivider.Visible = false
         else
             Tween(mainFrame, {Size = originalSize})
             Tween(shadow, {ImageTransparency = 0.6})
             contentContainer.Visible = true
             tabContainer.Visible = true
             resizeHandle.Visible = true
+            titleDivider.Visible = true
         end
     end)
 
@@ -519,7 +534,7 @@ function VexLib:CreateWindow(options)
             function section:CreateButton(text, callback)
                 local btn = Create("TextButton", {
                     Parent = sectionContent,
-                    BackgroundColor3 = Config.Theme.Accent,
+                    BackgroundColor3 = Color3.fromRGB(35, 90, 200),
                     BorderSizePixel = 0,
                     Size = UDim2.new(1, 0, 0, 34),
                     Font = Enum.Font.GothamSemibold,
@@ -533,25 +548,17 @@ function VexLib:CreateWindow(options)
                 Create("UICorner", {Parent = btn, CornerRadius = UDim.new(0, 6)})
 
                 btn.MouseEnter:Connect(function()
-                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(
-                        math.min(Config.Theme.Accent.R * 255 + 20, 255),
-                        math.min(Config.Theme.Accent.G * 255 + 20, 255),
-                        math.min(Config.Theme.Accent.B * 255 + 20, 255)
-                    )})
+                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(50, 110, 230)})
                 end)
 
                 btn.MouseLeave:Connect(function()
-                    Tween(btn, {BackgroundColor3 = Config.Theme.Accent})
+                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(35, 90, 200)})
                 end)
 
                 btn.MouseButton1Click:Connect(function()
-                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(
-                        math.max(Config.Theme.Accent.R * 255 - 30, 0),
-                        math.max(Config.Theme.Accent.G * 255 - 30, 0),
-                        math.max(Config.Theme.Accent.B * 255 - 30, 0)
-                    )}, TweenInfo.new(0.1))
+                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(25, 70, 160)}, TweenInfo.new(0.1))
                     task.wait(0.1)
-                    Tween(btn, {BackgroundColor3 = Config.Theme.Accent}, TweenInfo.new(0.15))
+                    Tween(btn, {BackgroundColor3 = Color3.fromRGB(35, 90, 200)}, TweenInfo.new(0.15))
                     if callback then callback() end
                 end)
 
@@ -660,9 +667,9 @@ function VexLib:CreateWindow(options)
 
                 local track = Create("Frame", {
                     Parent = sliderFrame,
-                    BackgroundColor3 = Config.Theme.Tertiary,
+                    BackgroundColor3 = Color3.fromRGB(45, 45, 50),
                     BorderSizePixel = 0,
-                    Size = UDim2.new(1, 0, 0, 6),
+                    Size = UDim2.new(1, 0, 0, 5),
                     Position = UDim2.new(0, 0, 0, 34)
                 })
 
@@ -670,7 +677,7 @@ function VexLib:CreateWindow(options)
 
                 local fill = Create("Frame", {
                     Parent = track,
-                    BackgroundColor3 = Config.Theme.Accent,
+                    BackgroundColor3 = Color3.fromRGB(50, 120, 240),
                     BorderSizePixel = 0,
                     Size = UDim2.new((slider.Value - min) / (max - min), 0, 1, 0)
                 })
@@ -679,15 +686,15 @@ function VexLib:CreateWindow(options)
 
                 local handle = Create("Frame", {
                     Parent = track,
-                    BackgroundColor3 = Config.Theme.Text,
+                    BackgroundColor3 = Color3.fromRGB(240, 240, 245),
                     BorderSizePixel = 0,
-                    Size = UDim2.new(0, 14, 0, 14),
-                    Position = UDim2.new((slider.Value - min) / (max - min), -7, 0.5, -7),
+                    Size = UDim2.new(0, 16, 0, 16),
+                    Position = UDim2.new((slider.Value - min) / (max - min), -8, 0.5, -8),
                     ZIndex = 2
                 })
 
                 Create("UICorner", {Parent = handle, CornerRadius = UDim.new(1, 0)})
-                Create("UIStroke", {Parent = handle, Color = Config.Theme.Accent, Thickness = 2})
+                Create("UIStroke", {Parent = handle, Color = Color3.fromRGB(50, 120, 240), Thickness = 2.5})
 
                 local dragging = false
 
@@ -741,7 +748,7 @@ function VexLib:CreateWindow(options)
                     local pos = (val - min) / (max - min)
                     valueLabel.Text = tostring(val)
                     fill.Size = UDim2.new(pos, 0, 1, 0)
-                    handle.Position = UDim2.new(pos, -7, 0.5, -7)
+                    handle.Position = UDim2.new(pos, -8, 0.5, -8)
                     if callback then callback(val) end
                 end
 
@@ -1161,10 +1168,10 @@ function VexLib:CreateWindow(options)
 
                     local track = Create("Frame", {
                         Parent = sliderFrame,
-                        BackgroundColor3 = Config.Theme.Tertiary,
+                        BackgroundColor3 = Color3.fromRGB(45, 45, 50),
                         BorderSizePixel = 0,
-                        Size = UDim2.new(1, -30, 0, 6),
-                        Position = UDim2.new(0, 26, 0.5, -3)
+                        Size = UDim2.new(1, -30, 0, 5),
+                        Position = UDim2.new(0, 26, 0.5, -2)
                     })
 
                     Create("UICorner", {Parent = track, CornerRadius = UDim.new(1, 0)})
@@ -1180,13 +1187,14 @@ function VexLib:CreateWindow(options)
 
                     local handle = Create("Frame", {
                         Parent = track,
-                        BackgroundColor3 = Config.Theme.Text,
+                        BackgroundColor3 = Color3.fromRGB(240, 240, 245),
                         BorderSizePixel = 0,
-                        Size = UDim2.new(0, 12, 0, 12),
-                        Position = UDim2.new(colorValues[i] / 255, -6, 0.5, -6)
+                        Size = UDim2.new(0, 14, 0, 14),
+                        Position = UDim2.new(colorValues[i] / 255, -7, 0.5, -7)
                     })
 
                     Create("UICorner", {Parent = handle, CornerRadius = UDim.new(1, 0)})
+                    Create("UIStroke", {Parent = handle, Color = Color3.fromRGB(80, 80, 85), Thickness = 1.5})
 
                     local dragging = false
 
@@ -1195,7 +1203,7 @@ function VexLib:CreateWindow(options)
                         local value = math.floor(pos * 255)
                         colorValues[i] = value
                         fill.Size = UDim2.new(pos, 0, 1, 0)
-                        handle.Position = UDim2.new(pos, -6, 0.5, -6)
+                        handle.Position = UDim2.new(pos, -7, 0.5, -7)
 
                         picker.Value = Color3.fromRGB(colorValues[1], colorValues[2], colorValues[3])
                         colorPreview.BackgroundColor3 = picker.Value
