@@ -13,7 +13,7 @@
 
     LOAD VIA LOADSTRING:
         local NexusUI = loadstring(game:HttpGet(
-            "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/NexusUI.lua"
+            "https://raw.githubusercontent.com/NexusHuby/frieren/refs/heads/main/Build"
         ))()
 
     QUICK START:
